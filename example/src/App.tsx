@@ -1,13 +1,20 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-recaptcha-enterprise';
+import {
+  initRecaptchaEnterpriseClient,
+  execute,
+} from 'react-native-recaptcha-enterprise';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    (async () => {
+      initRecaptchaEnterpriseClient('').then(() => {
+        execute('login').then(setResult);
+      });
+    })();
   }, []);
 
   return (
@@ -22,6 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
   },
   box: {
     width: 60,

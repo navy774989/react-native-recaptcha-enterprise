@@ -11,11 +11,15 @@ npm install react-native-recaptcha-enterprise
 ## Usage
 
 ```js
-import { multiply } from 'react-native-recaptcha-enterprise';
+import {
+  initRecaptchaEnterpriseClient,
+  execute,
+} from 'react-native-recaptcha-enterprise';
 
 // ...
 
-const result = await multiply(3, 7);
+await initRecaptchaEnterpriseClient('siteKey');
+const result = await execute('login');
 ```
 
 ## Contributing
