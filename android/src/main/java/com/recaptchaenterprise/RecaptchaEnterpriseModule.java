@@ -36,6 +36,10 @@ public class RecaptchaEnterpriseModule extends ReactContextBaseJavaModule {
   // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
   public void initRecaptchaEnterpriseClient(String siteKey, Promise promise) {
+    if(getCurrentActivity() == null || getCurrentActivity().getApplication() == null){
+      promise.reject("error","currentActivity is null");
+      return;
+    }
     Recaptcha
       .getTasksClient(getCurrentActivity().getApplication(), siteKey)
       .addOnSuccessListener(
